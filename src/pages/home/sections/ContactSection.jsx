@@ -4,6 +4,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { Animated } from "../../../components/Animated";
+import { container, fadeMove } from "../../../utils/animations";
 
 function ContactSection() {
   const [formData, setFormData] = useState({
@@ -27,7 +29,10 @@ function ContactSection() {
       {/* Left side - Contact Info */}
       <div className="bg-primary text-primary-foreground w-full flex md:justify-end md:p-0 py-10">
         {/* container */}
-        <div className="flex flex-col justify-between h-full  p-8 md:p-12 lg:p-16">
+        <Animated
+          variants={fadeMove("up", 30, 0)}
+          className="flex flex-col justify-between h-full  p-8 md:p-12 lg:p-16"
+        >
           <div className="space-y-12">
             <h1 className="text-5xl md:text-6xl font-black tracking-tight">
               CONTACTS
@@ -88,100 +93,87 @@ function ContactSection() {
               </svg>
             </a>
           </div> */}
-        </div>
+        </Animated>
       </div>
       {/* Right side - Contact Form */}
       <div className="bg-[#2B2B2B] text-white w-full p-8 py-10 md:p-12 lg:p-16 flex flex-col justify-between">
         <div className="lg:w-xl">
-          <h2 className="text-4xl md:text-5xl font-black tracking-tight mb-8 md:mb-12">
+          <Animated
+            variants={fadeMove("up", 30, 0.1)}
+            className="text-4xl md:text-5xl font-black tracking-tight mb-8 md:mb-12"
+          >
             {"LET'S "}
             <span className="text-primary">GET IN TOUCH</span>
-          </h2>
+          </Animated>
 
-          <form onSubmit={handleSubmit} className="space-y-6 mb-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label
-                  htmlFor="name"
-                  className="text-sm font-bold tracking-wider uppercase "
+          <Animated variants={container(0.15)}>
+            <form onSubmit={handleSubmit} className="space-y-6 mb-10">
+              <Animated variants={fadeMove("up", 20)}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label className="text-sm font-bold uppercase">NAME</Label>
+                    <Input
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      className="bg-transparent border-gray-100/20"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="text-sm font-bold uppercase">PHONE</Label>
+                    <Input
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Your phone"
+                      className="bg-transparent border-gray-100/20"
+                    />
+                  </div>
+                </div>
+              </Animated>
+
+              <Animated variants={fadeMove("up", 20)}>
+                <div className="space-y-2">
+                  <Label className="text-sm font-bold uppercase">EMAIL</Label>
+                  <Input
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Your email"
+                    className="bg-transparent border-gray-100/20"
+                  />
+                </div>
+              </Animated>
+
+              <Animated variants={fadeMove("up", 20)}>
+                <div className="space-y-2">
+                  <Label className="text-sm font-bold uppercase">MESSAGE</Label>
+                  <Textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={5}
+                    placeholder="Message"
+                    className="bg-transparent border-gray-100/20 resize-none"
+                  />
+                </div>
+              </Animated>
+
+              <Animated variants={fadeMove("up", 20)}>
+                <Button
+                  type="submit"
+                  className="w-full py-6 font-bold uppercase"
                 >
-                  NAME
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Your name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="bg-transparent border-gray-100/10 focus:border-foreground/40"
-                />
-              </div>
+                  Submit
+                </Button>
+              </Animated>
+            </form>
+          </Animated>
 
-              <div className="space-y-2">
-                <Label
-                  htmlFor="phone"
-                  className="text-sm font-bold tracking-wider uppercase "
-                >
-                  PHONE
-                </Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="Your phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="bg-transparent border-gray-100/10 placeholder:text-muted-foreground focus:border-foreground/40"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label
-                htmlFor="email"
-                className="text-sm font-bold tracking-wider uppercase "
-              >
-                EMAIL
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Your email"
-                value={formData.email}
-                onChange={handleChange}
-                className="bg-transparent border-gray-100/10  placeholder:text-muted-foreground focus:border-foreground/40"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label
-                htmlFor="message"
-                className="text-sm font-bold tracking-wider uppercase "
-              >
-                MESSAGE
-              </Label>
-              <Textarea
-                id="message"
-                name="message"
-                placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
-                rows={5}
-                className="bg-transparent border-gray-100/10 placeholder:text-muted-foreground focus:border-foreground/40 resize-none"
-              />
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full  font-bold text-base py-6 rounded-full uppercase tracking-wider"
-            >
-              Submit
-            </Button>
-          </form>
-          <div className="text-center text-sm lg:mt-8 space-y-1">
-            <p>©Suntrail. All rights reserved.</p>
+          <div className="text-center text-sm space-y-1 text-muted-foreground">
+            <p>© Suntrail. All rights reserved.</p>
             <p>Designed by Fourtwelve. Powered by Framer.</p>
           </div>
         </div>

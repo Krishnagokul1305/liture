@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-
+import { container, fadeMove } from "../../../utils/animations";
+import { Animated } from "../../../components/Animated";
 function MembersSection() {
   const teamMembers = [
     {
@@ -29,9 +30,7 @@ function MembersSection() {
   ];
 
   const floatAnimation = (delay = 0) => ({
-    animate: {
-      y: [0, -12, 0],
-    },
+    animate: { y: [0, -12, 0] },
     transition: {
       duration: 3,
       ease: "easeInOut",
@@ -42,63 +41,64 @@ function MembersSection() {
 
   return (
     <section className="relative bg-red-50/50 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* ================= FLOATING SHAPES ================= */}
       <div className="hidden lg:block">
         <motion.div
           {...floatAnimation(0)}
           className="absolute top-8 left-8 w-8 h-8 border-4 border-primary rounded-full"
-          aria-hidden="true"
         />
-
         <motion.div
           {...floatAnimation(0.4)}
           className="absolute top-32 left-16 w-12 h-12 border-4 border-chart-4 rotate-45"
-          aria-hidden="true"
         />
-
         <motion.div
           {...floatAnimation(0.2)}
           className="absolute top-4 right-4 w-8 h-8 border-4 border-[#8FBE5C] rotate-45"
-          aria-hidden="true"
         />
-
         <motion.div
           {...floatAnimation(0.6)}
           className="absolute bottom-32 left-5 w-16 h-16 border-4 border-chart-4 rotate-12"
-          style={{ borderRadius: "0" }}
-          aria-hidden="true"
         />
         <motion.div
           {...floatAnimation(0.8)}
           className="absolute top-12 right-12 w-10 h-10 border-4 border-chart-1 rounded-full"
-          aria-hidden="true"
         />
         <motion.div
           {...floatAnimation(1)}
           className="absolute bottom-8 right-16 w-12 h-12 border-4 border-[#8FBE5C] rotate-45"
-          aria-hidden="true"
         />
       </div>
 
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
+        {/* ================= HEADER ================= */}
+        <Animated
+          variants={fadeMove("up", 40, 0)}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 text-balance">
-            MEET <span className="text-primary">OUR LEADERSHIP</span>
+            Meet <span className="text-primary">Our Leadership</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
             At our summer camp, we believe that every child deserves the
             opportunity to have fun, learn, and grow. We offer flexible
             scheduling options to accommodate busy families.
           </p>
-        </div>
+        </Animated>
 
-        {/* Team Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-12">
+        {/* ================= TEAM GRID (STAGGERED) ================= */}
+        <motion.div
+          variants={container(0.15)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-12"
+        >
           {teamMembers.map((member, i) => (
-            <div
+            <motion.div
               key={member.name}
+              variants={fadeMove("up", 40, i * 0.2)}
               className={`flex flex-col items-center ${
-                i % 2 == 0 && "lg:mt-10"
+                i % 2 === 0 ? "lg:mt-10" : ""
               }`}
             >
               <div
@@ -107,22 +107,19 @@ function MembersSection() {
                 <img
                   src={member.image || "/placeholder.svg"}
                   alt={member.name}
-                  width={400}
-                  height={400}
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Name and Role */}
               <h3 className="font-black text-xl sm:text-2xl mb-2 text-center">
                 {member.name}
               </h3>
               <p className="text-muted-foreground text-sm sm:text-base">
                 {member.role}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
