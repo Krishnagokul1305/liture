@@ -85,7 +85,6 @@ function MembersSection() {
           </p>
         </Animated>
 
-        {/* ================= TEAM GRID (STAGGERED) ================= */}
         <motion.div
           variants={container(0.15)}
           initial="hidden"

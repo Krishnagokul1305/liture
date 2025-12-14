@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,7 +7,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
-
 import { motion } from "framer-motion";
 import { Animated } from "../../../components/Animated";
 import { container, fadeMove } from "../../../utils/animations";
@@ -74,7 +71,7 @@ export default function MembershipSection() {
           viewport={{ once: true, amount: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-center"
         >
-          {plans.map((plan, index) => (
+          {plans.map((plan) => (
             <motion.div
               key={plan.name}
               variants={fadeMove("up", 40, plan.isPopular ? 0.15 : 0)}
