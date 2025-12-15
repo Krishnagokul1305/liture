@@ -40,7 +40,7 @@ function MembersSection() {
   });
 
   return (
-    <section className="relative bg-red-50/50 py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section className="relative bg-red-50/50 py-24 px-6 md:px-4 overflow-hidden">
       {/* ================= FLOATING SHAPES ================= */}
       <div className="hidden lg:block">
         <motion.div

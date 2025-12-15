@@ -71,7 +71,7 @@ function OpportunitiesSection() {
   };
 
   return (
-    <section className="bg-red-50/50 py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="bg-red-50/50 py-12 md:py-24 px-6 md:px-4 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <Animated
           variants={fadeMove("up", 40, 0)}

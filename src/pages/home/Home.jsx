@@ -1,5 +1,5 @@
 import AboutUsSection from "./sections/AboutUsSection";
-import AchievementsBanner from "./sections/AchievementsBanner";
+import AchievementsSection from "./sections/AchievementsSection";
 import ContactSection from "./sections/ContactSection";
 import HeroSection from "./sections/HeroSection";
 import MembershipSection from "./sections/MembershipSection";
@@ -10,8 +10,10 @@ function Home() {
   return (
     <div className="w-full">
       <HeroSection />
-      <AchievementsBanner />
+
+      {/* <AchievementsBanner /> */}
       <AboutUsSection />
+      <AchievementsSection />
       <OpportunitiesSection />
       <MembershipSection />
       <MembersSection />

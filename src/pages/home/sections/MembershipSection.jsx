@@ -47,7 +47,7 @@ export default function MembershipSection() {
   ];
 
   return (
-    <section className="min-h-[80vh] py-12 md:py-24 px-4 sm:px-6 lg:px-8">
+    <section className="min-h-[80vh] py-12 md:py-24 px-6 md:px-4 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* 🔹 HEADER (appears first) */}
         <Animated

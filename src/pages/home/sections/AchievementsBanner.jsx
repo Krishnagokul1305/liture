@@ -89,7 +89,7 @@ function AchievementsBanner() {
 
   return (
     <div className="bg-primary w-[90%] mx-auto text-white rounded-3xl p-12 md:p-16">
-      <div className="max-w-7xl mx-auto">
+      <div className="">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-16">
           <div>
             <h2 className="text-4xl font-bold leading-tight">
