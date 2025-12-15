@@ -25,7 +25,6 @@ function AchievementsSection() {
 
       <div className="container mx-auto px-6 lg:px-12 py-16 lg:py-32 relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
-          {/* Left side - Credit cards */}
           <div>
             <Animated variants={fadeMove("up", 40, 0)} className="space-y-8">
               <h1 className="text-4xl lg:text-5xl font-bold text-balance">
