@@ -83,9 +83,9 @@ function MembersSection() {
             Meet <span className="text-primary">Our Leadership</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-            At our summer camp, we believe that every child deserves the
-            opportunity to have fun, learn, and grow. We offer flexible
-            scheduling options to accommodate busy families.
+            Liture Edutech was founded with a vision to make quality learning
+            accessible and career-focused for every learner, led by passionate
+            educators and industry professionals.
           </p>
         </Animated>
 
