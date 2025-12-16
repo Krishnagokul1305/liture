@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
+import { Logo } from "../assets";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,19 +20,32 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed w-full top-0 z-50 bg-white/80 text-gray-800 backdrop-blur-md shadow-md transition-colors duration-300">
+      <header className="fixed w-full border-b top-0 z-50 bg-white/80  backdrop-blur-md  transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
-              <h1 className="font-bold text-2xl">EduTech</h1>
+              <a href="/" className="flex items-center">
+                <img
+                  src={Logo}
+                  alt="EduTech Logo"
+                  className="h-14 w-auto object-contain"
+                />
+              </a>
             </div>
 
             <nav className="hidden md:flex space-x-8">
               {navItems.map((item) => (
                 <a
-                  key={item.id}
-                  href={item.href}
-                  className="text-sm font-medium hover:text-primary transition-colors duration-200"
+                  href="#"
+                  class="relative text-sm font-medium hover:text-primary inline-block cursor-pointer  
+         transition-colors duration-[400ms] ease-[cubic-bezier(0.25,0.8,0.25,1)]
+          focus:text-white
+         after:pointer-events-none after:absolute after:-bottom-[2px] after:left-1/2
+         after:h-[2px] after:w-0 after:bg-primary
+         after:transition-all after:duration-[400ms]
+         after:ease-[cubic-bezier(0.25,0.8,0.25,1)]
+         hover:after:w-full hover:after:left-0
+         focus:after:w-full focus:after:left-0"
                 >
                   {item.name}
                 </a>

@@ -6,25 +6,29 @@ function MembersSection() {
     {
       name: "CAMERON WILLIAMSON",
       role: "Head Counselor",
-      image: "/man-with-glasses-and-beret-smiling.jpg",
+      image:
+        "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       bgColor: "bg-primary",
     },
     {
       name: "JANE COOPER",
       role: "Program Director",
-      image: "/smiling-curly-woman.png",
+      image:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       bgColor: "bg-chart-4",
     },
     {
       name: "ROBERT FOX",
       role: "Assistant Director",
-      image: "/man-with-backwards-cap-smiling.jpg",
+      image:
+        "https://plus.unsplash.com/premium_photo-1689977927774-401b12d137d6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       bgColor: "bg-chart-2",
     },
     {
       name: "EMILY RODRIGUEZ",
       role: "Manager",
-      image: "/woman-with-red-hair-and-glasses.jpg",
+      image:
+        "https://plus.unsplash.com/premium_photo-1690407617686-d449aa2aad3c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       bgColor: "bg-chart-1",
     },
   ];
@@ -73,7 +77,7 @@ function MembersSection() {
         {/* ================= HEADER ================= */}
         <Animated
           variants={fadeMove("up", 40, 0)}
-          className="text-center mb-16"
+          className="text-center md:mb-16 mb-10"
         >
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 text-balance">
             Meet <span className="text-primary">Our Leadership</span>

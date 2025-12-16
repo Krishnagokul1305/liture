@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -77,13 +78,13 @@ export default function MembershipSection() {
               variants={fadeMove("up", 40, plan.isPopular ? 0.15 : 0)}
             >
               <Card
-                className={`relative overflow-hidden transition-all ${
+                className={`relative overflow-hidden rounded-lg transition-all ${
                   plan.isPopular
                     ? "bg-primary text-white border-0 shadow-2xl md:scale-105 lg:scale-110"
                     : "bg-white border border-gray-200 shadow-sm hover:shadow-md"
                 }`}
               >
-                <CardHeader className="pb-6">
+                <CardHeader className="pb-3 md:pb-6">
                   <CardTitle
                     className={`text-2xl font-bold ${
                       plan.isPopular ? "text-white" : "text-gray-900"
@@ -123,13 +124,20 @@ export default function MembershipSection() {
 
                   {/* CTA */}
                   <Button
-                    className={`w-full py-6 rounded-lg font-medium mt-6 ${
-                      plan.isPopular
-                        ? "bg-white text-primary hover:bg-red-50"
-                        : "bg-primary text-white"
-                    }`}
+                    className={`group relative w-full py-6  rounded-lg font-medium mt-10
+    overflow-hidden flex items-center justify-center gap-2
+    ${
+      plan.isPopular
+        ? "bg-white text-primary hover:bg-red-50"
+        : "bg-primary text-white"
+    }`}
                   >
-                    Get Started
+                    <span className="relative z-10">Get Started</span>
+
+                    <ArrowRight
+                      className="relative z-10 size-5 transition-transform duration-300
+               group-hover:translate-x-1"
+                    />
                   </Button>
                 </CardContent>
               </Card>

@@ -119,8 +119,11 @@ function OpportunitiesSection() {
               }}
             >
               {activities.map((activity, index) => (
-                <div key={index} className="w-full md:w-1/2 flex-shrink-0 px-2">
-                  <Card className="overflow-hidden h-full p-0">
+                <div
+                  key={index}
+                  className="w-full  md:w-1/2 flex-shrink-0 px-2"
+                >
+                  <Card className="overflow-hidden rounded-lg h-full p-0">
                     <img
                       src={activity.image}
                       alt={activity.title}

@@ -3,6 +3,42 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: "MyFont";
+  src: url("./assets/fonts/font-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MyFont";
+  src: url("./assets/fonts/font-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MyFont";
+  src: url("./assets/fonts/font-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MyFont";
+  src: url("./assets/fonts/font-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "MyFont", ui-sans-serif, system-ui;
+}
+
 :root {
   --radius: 0.65rem;
   --background: oklch(1 0 0);
@@ -112,11 +148,67 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
+    font-family: var(--font-sans);
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes shine {
+  0% {
+    left: -100px;
+  }
+  60% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.animate-shine {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.button-shine {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  gap: 10px;
+  outline: none;
+  overflow: hidden;
+}
+
+.button-shine:hover {
+  transform: scale(1.01);
+}
+
+.button-shine:hover .icon {
+  transform: translate(4px);
+}
+
+.button-shine:hover::before {
+  animation: shine 1.5s ease-out infinite;
+}
+
+.button-shine::before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0) 70%
+  );
+  top: 0;
+  left: -100px;
+  opacity: 0.6;
 }

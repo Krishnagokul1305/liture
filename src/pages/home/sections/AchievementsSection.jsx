@@ -115,7 +115,7 @@ function AchievementsSection() {
             />
 
             {/* Optional soft overlay */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent" />
+            {/* <div className="absolute inset-0 bg-gradient-to-tr from-black/10 to-transparent" /> */}
           </Animated>
         </div>
       </div>

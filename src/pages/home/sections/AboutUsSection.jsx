@@ -11,7 +11,7 @@ function AboutUsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="grid min-h-[420px] grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          className="grid min-h-[420px] grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center"
         >
           {/* Text */}
           <motion.div variants={fadeMove("up", 40, 0)}>
@@ -29,7 +29,7 @@ function AboutUsSection() {
           {/* Image */}
           <motion.div
             variants={fadeMove("up", 40, 0.2)}
-            className="order-2 lg:order-1 relative w-full overflow-hidden rounded-2xl
+            className="order-2 lg:order-1 relative w-full overflow-hidden rounded-lg
                        h-[260px] sm:h-[320px] md:h-[380px] lg:h-[90%]"
           >
             <img
@@ -46,7 +46,7 @@ function AboutUsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="grid min-h-[420px] grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+          className="grid min-h-[420px] grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center"
         >
           {/* Text */}
           <motion.div
@@ -69,7 +69,7 @@ function AboutUsSection() {
           {/* Image */}
           <motion.div
             variants={fadeMove("up", 40, 0.2)}
-            className="order-2 lg:order-1 relative w-full overflow-hidden rounded-2xl
+            className="order-2 lg:order-1 relative w-full overflow-hidden rounded-lg
                        h-[260px] sm:h-[320px] md:h-[380px] lg:h-[90%]"
           >
             <img
