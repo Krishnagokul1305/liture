@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed w-full border-b top-0 z-50 bg-white/80  backdrop-blur-md  transition-colors duration-300">
+      <header className="fixed w-full border-b  bg-white  top-0 z-50   transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex-shrink-0">
@@ -58,7 +58,7 @@ const Header = () => {
               </Button>
 
               <button
-                className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                className="md:hidden p-2 rounded-full text-muted-foreground transition-colors duration-200"
                 onClick={toggleMenu}
                 aria-label="Toggle menu"
               >
