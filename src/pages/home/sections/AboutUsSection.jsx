@@ -3,7 +3,7 @@ import { container, fadeMove } from "../../../utils/animations";
 
 function AboutUsSection() {
   return (
-    <section className="py-16 bg-red-50/50 px-6 md:py-20">
+    <section className="py-16 bg-red-50/50 px-6 md:py-20" id="about">
       <div className="mx-auto max-w-7xl space-y-12 lg:space-y-24">
         {/* ================= ROW 1 ================= */}
         <motion.div

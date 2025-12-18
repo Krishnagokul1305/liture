@@ -1,23 +1,40 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import bgVideo from "../../../assets/bgvideo1.mp4"; // adjust path
 
 function HeroSection() {
   return (
-    <div className="h-screen relative overflow-hidden flex items-center justify-center">
-      <section className="max-w-5xl mx-auto px-6  py-10 text-center">
-        <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-          Education is a <span className="text-primary">Previlage</span>
+    <div className="relative min-h-screen overflow-hidden flex items-center">
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src={bgVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-black to-transparent" />
+
+      {/* Content */}
+      <section className="relative z-10 max-w-7xl mx-auto px-6 py-10 text-center text-white">
+        <h1 className="text-5xl md:text-8xl lg:text-9xl font-bold leading-tight">
+          Education is <br /> a <span className="text-primary">Privilege</span>
         </h1>
-        <p className="mt-6 max-w-3xl mx-auto text-muted-foreground text-base md:text-lg">
+
+        <p className="mt-6 max-w-3xl mx-auto text-white/80 text-base md:text-lg">
           Liture EdTech is a next-generation learning platform delivering
           high-quality education, industry-driven skill training, and real-world
           opportunities for students, professionals, and institutions.
         </p>
-        <Button className="md:mt-8 mt-6 rounded-full group text-lg py-6 px-10">
-          Explore Now{" "}
+
+        <Button className="md:mt-8 mt-6 rounded-full group text-lg py-5">
+          Explore Now
           <ArrowRight
-            className="relative z-10 size-5 transition-transform duration-300
-               group-hover:translate-x-1"
+            className="ml-2 size-5 transition-transform duration-300
+            group-hover:translate-x-1"
           />
         </Button>
       </section>

@@ -25,7 +25,10 @@ function ContactSection() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   return (
-    <div className="min-h-[70vh] flex flex-col w-full lg:flex-row">
+    <section
+      className="min-h-[70vh] flex flex-col w-full lg:flex-row"
+      id="contact"
+    >
       {/* Left side - Contact Info */}
       <div className="bg-primary text-primary-foreground w-full flex md:justify-end md:p-0 py-10">
         {/* container */}
@@ -178,7 +181,7 @@ function ContactSection() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
