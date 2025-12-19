@@ -82,7 +82,7 @@ const Header = () => {
                   <ChevronDown className="h-4 w-4" />
                 </button>
 
-                <div className="absolute top-full left-0 mt-2 w-48 rounded-xl bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <div className="absolute top-full left-0 mt-2 w-48 rounded-xl overflow-hidden bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   {[
                     { name: "Internships", path: "/internships" },
                     { name: "Careers", path: "/careers" },
@@ -161,7 +161,7 @@ const Header = () => {
               </button>
 
               {isOpportunitiesOpen && (
-                <div className="ml-4 space-y-2">
+                <div className="ml-4 space-y-2 overflow-hidden">
                   <button
                     onClick={() => navigate("/internships")}
                     className="block px-4 py-2"

@@ -176,8 +176,8 @@ function ContactSection() {
           </Animated>
 
           <div className="text-center text-sm space-y-1 text-muted-foreground">
-            <p>© Suntrail. All rights reserved.</p>
-            <p>Designed by Fourtwelve. Powered by Framer.</p>
+            <p>© Liture. All rights reserved.</p>
+            {/* <p>Designed with passion.</p> */}
           </div>
         </div>
       </div>
