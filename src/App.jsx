@@ -1,12 +1,20 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Header from "./components/Header";
 import Home from "./pages/home/Home";
+import Webinars from "./pages/webinars/Webinars";
+import Internship from "./pages/internship/Internship";
 
 function App() {
   return (
-    <div>
+    <Router>
       <Header />
-      <Home />
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/webinars" element={<Webinars />} />
+        <Route path="/internship" element={<Internship />} />
+      </Routes>
+    </Router>
   );
 }
 

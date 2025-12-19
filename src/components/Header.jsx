@@ -1,49 +1,50 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { Logo } from "../assets";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isOpportunitiesOpen, setIsOpportunitiesOpen] = useState(false);
 
   const navItems = [
     { id: 1, name: "Home", href: "home" },
     { id: 2, name: "About Us", href: "about" },
-    { id: 3, name: "Opportunities", href: "opportunities" },
     { id: 4, name: "Memberships", href: "membership" },
     { id: 5, name: "Contact Us", href: "contact" },
   ];
 
-  // Detect scroll
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll to section
   const handleScrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (window.location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const el = document.getElementById(sectionId);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
     setIsMenuOpen(false);
   };
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
     <>
       {/* HEADER */}
       <header
-        className={`fixed w-full top-0 z-50 transition-all duration-300
-        ${
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white border-b shadow-sm"
             : "bg-transparent border-none"
@@ -52,135 +53,145 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex-shrink-0">
-              <a href="/" className="flex items-center">
-                <img
-                  src={Logo}
-                  alt="EduTech Logo"
-                  className={`h-14 w-auto transition-all duration-300`}
-                />
-              </a>
-            </div>
+            <button onClick={() => navigate("/")} className="flex items-center">
+              <img src={Logo} alt="Logo" className="h-14" />
+            </button>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex space-x-8">
+            {/* DESKTOP NAV */}
+            <nav className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => handleScrollToSection(item.href)}
-                  className={`relative font-medium cursor-pointer hover:text-primary transition-colors duration-300
-                  ${scrolled ? "text-gray-900 " : "text-white"}
-                  after:pointer-events-none after:absolute after:-bottom-[2px] after:left-1/2
-                  after:h-[2px] after:w-0 after:bg-primary
-                  after:transition-all after:duration-300
-                  hover:after:w-full hover:after:left-0`}
+                  className={`relative font-medium cursor-pointer hover:text-primary transition-colors duration-300 ${
+                    scrolled ? "text-gray-900" : "text-white"
+                  } after:absolute after:-bottom-[2px] after:left-1/2 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full hover:after:left-0`}
                 >
                   {item.name}
                 </button>
               ))}
+
+              {/* Opportunities Dropdown */}
+              <div className="relative group">
+                <button
+                  className={`flex items-center gap-1 font-medium transition ${
+                    scrolled ? "text-gray-900" : "text-white"
+                  } hover:text-primary`}
+                >
+                  Opportunities
+                  <ChevronDown className="h-4 w-4" />
+                </button>
+
+                <div className="absolute top-full left-0 mt-2 w-48 rounded-xl bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  {[
+                    { name: "Internships", path: "/internships" },
+                    { name: "Careers", path: "/careers" },
+                    { name: "Webinars", path: "/webinars" },
+                    { name: "Partnerships", path: "/partnership" },
+                  ].map((link) => (
+                    <button
+                      key={link.name}
+                      onClick={() => navigate(link.path)}
+                      className="block w-full text-left px-4 py-3 text-sm font-medium text-gray-700 hover:bg-red-50/50 hover:text-primary"
+                    >
+                      {link.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </nav>
 
-            {/* Right Section */}
-            <div className="flex items-center space-x-4">
-              <Button
-                className={`rounded-full hidden md:block transition-all duration-300 bg-primary text-white`}
-              >
-                Contact Us
-              </Button>
-
-              {/* Mobile Toggle */}
-              <button
-                className={`md:hidden p-2 rounded-full transition-colors duration-200
-                ${scrolled ? "text-gray-900" : "text-white"}`}
-                onClick={toggleMenu}
-                aria-label="Toggle menu"
-              >
-                {isMenuOpen ? (
-                  <X className="h-6 w-6" />
-                ) : (
-                  <Menu className="h-6 w-6" />
-                )}
-              </button>
-            </div>
+            {/* Mobile Toggle */}
+            <button
+              className={`md:hidden ${
+                scrolled ? "text-gray-900" : "text-white"
+              }`}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X /> : <Menu />}
+            </button>
           </div>
         </div>
       </header>
 
       {/* MOBILE MENU */}
       <div
-        className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300
-        ${
-          isMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 z-50 md:hidden transition-opacity ${
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        {/* Backdrop */}
         <div
-          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-          onClick={toggleMenu}
+          className="absolute inset-0 bg-black/50"
+          onClick={() => setIsMenuOpen(false)}
         />
 
-        {/* Panel */}
         <div
-          className={`absolute inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl
-          transform transition-transform duration-300 ease-out
-          ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}
+          className={`absolute right-0 top-0 h-full w-full max-w-sm bg-white shadow-xl transform transition-transform ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         >
-          <div className="flex flex-col h-full">
-            {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b">
-              <h2 className="text-xl font-bold">Menu</h2>
+          <div className="flex items-center justify-between p-6 border-b">
+            <h2 className="text-xl font-bold">Menu</h2>
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="p-2 rounded-full hover:bg-gray-100"
+            >
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          <div className="p-6 space-y-4">
+            {navItems.map((item) => (
               <button
-                onClick={toggleMenu}
-                className="p-2 rounded-full hover:bg-gray-100"
+                key={item.id}
+                onClick={() => handleScrollToSection(item.href)}
+                className="block w-full text-left px-4 py-3 text-lg font-medium hover:bg-gray-100"
               >
-                <X className="h-6 w-6" />
+                {item.name}
               </button>
-            </div>
+            ))}
 
-            {/* Links */}
-            <nav className="flex-1 p-6">
-              <div className="space-y-2">
-                {navItems.map((item, index) => (
+            {/* Mobile Opportunities */}
+            <div>
+              <button
+                onClick={() => setIsOpportunitiesOpen(!isOpportunitiesOpen)}
+                className="w-full flex items-center gap-1 px-4 py-3 text-lg font-medium hover:bg-red-50/50"
+              >
+                Opportunities <ChevronDown className="h-4 w-4" />
+              </button>
+
+              {isOpportunitiesOpen && (
+                <div className="ml-4 space-y-2">
                   <button
-                    key={item.id}
-                    onClick={() => handleScrollToSection(item.href)}
-                    className="w-full text-left px-4 py-4 text-lg font-medium
-                    hover:bg-gray-100 transition-all duration-200 transform hover:translate-x-2"
-                    style={{
-                      animation: isMenuOpen
-                        ? `slideIn 0.3s ease-out ${index * 0.1}s both`
-                        : "none",
-                    }}
+                    onClick={() => navigate("/internships")}
+                    className="block px-4 py-2"
                   >
-                    {item.name}
+                    Internships
                   </button>
-                ))}
-              </div>
-            </nav>
-
-            {/* Footer */}
-            <div className="p-6 border-t">
-              <Button className="w-full rounded-lg py-5">Contact Us</Button>
+                  <button
+                    onClick={() => navigate("/careers")}
+                    className="block px-4 py-2"
+                  >
+                    Careers
+                  </button>
+                  <button
+                    onClick={() => navigate("/webinars")}
+                    className="block px-4 py-2"
+                  >
+                    Webinars
+                  </button>
+                  <button
+                    onClick={() => navigate("/partnership")}
+                    className="block px-4 py-2"
+                  >
+                    Partnerships
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>
       </div>
-
-      {/* Slide animation */}
-      <style jsx>{`
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateX(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
     </>
   );
 };

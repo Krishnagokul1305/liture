@@ -10,8 +10,6 @@ function Home() {
   return (
     <div className="w-full">
       <HeroSection />
-
-      {/* <AchievementsBanner /> */}
       <AboutUsSection />
       <AchievementsSection />
       <OpportunitiesSection />

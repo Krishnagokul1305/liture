@@ -14,7 +14,6 @@ function HeroSection() {
 
   return (
     <div className="relative min-h-screen overflow-hidden flex items-center">
-      {/* Background Video */}
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src={bgVideo}
@@ -28,7 +27,7 @@ function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-tr from-black to-transparent" />
 
       {/* Content */}
-      <section className="relative z-10 max-w-7xl mx-auto md:text-center w-full px-6 py-10  text-white">
+      <section className="relative z-10 max-w-7xl mx-auto text-center w-full px-6 py-10  text-white">
         <Animated variants={fadeMove("up", 50, 0.1)}>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
             Education is <br /> a{" "}

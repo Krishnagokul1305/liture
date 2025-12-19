@@ -1,26 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { fadeMove } from "../../../utils/animations";
+import { useEffect, useState } from "react";
 import { Animated } from "../../../components/Animated";
+import { fadeMove } from "../../../utils/animations";
 
 function OpportunitiesSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  // Detect screen size
-  useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 768);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const [api, setApi] = useState();
+  const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
 
   const activities = [
     {
@@ -59,16 +54,18 @@ function OpportunitiesSection() {
     },
   ];
 
-  // Index limits
-  const maxIndex = isDesktop ? activities.length - 2 : activities.length - 1;
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
 
-  const handlePrevious = () => {
-    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
-  };
+    setCount(api.scrollSnapList().length);
+    setCurrent(api.selectedScrollSnap());
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
-  };
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap());
+    });
+  }, [api]);
 
   return (
     <section
@@ -91,49 +88,49 @@ function OpportunitiesSection() {
             </p>
           </div>
 
-          {/* Arrows */}
           <div className="flex items-center gap-3">
             <Button
-              onClick={handlePrevious}
+              onClick={() => api?.scrollPrev()}
               size="icon"
               className="h-14 w-14 rounded-full"
+              disabled={!api?.canScrollPrev()}
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
             <Button
-              onClick={handleNext}
+              onClick={() => api?.scrollNext()}
               size="icon"
               className="h-14 w-14 rounded-full"
+              disabled={!api?.canScrollNext()}
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
           </div>
         </Animated>
 
-        {/* 🔹 CAROUSEL (appears after header) */}
         <Animated variants={fadeMove("up", 40, 0.25)}>
-          <div className="relative overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{
-                transform: `translateX(-${
-                  currentIndex * (isDesktop ? 50 : 100)
-                }%)`,
-              }}
-            >
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
               {activities.map((activity, index) => (
-                <div
+                <CarouselItem
                   key={index}
-                  className="w-full  md:w-1/2 flex-shrink-0 px-2"
+                  className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3"
                 >
                   <Card className="overflow-hidden rounded-lg h-full p-0">
                     <img
-                      src={activity.image}
+                      src={activity.image || "/placeholder.svg"}
                       alt={activity.title}
                       className="w-full h-72 object-cover"
                     />
 
-                    <CardContent className="p-6 pt-0 space-y-4">
+                    <CardContent className="p-6 pt-0 space-y-4 flex flex-col">
                       <h2 className="text-2xl font-black text-gray-900">
                         {activity.title}
                       </h2>
@@ -142,7 +139,7 @@ function OpportunitiesSection() {
                         {activity.description}
                       </p>
 
-                      <div className="flex items-center justify-between pt-2">
+                      <div className="flex items-center justify-between pt-2 mt-auto">
                         <button className="text-primary font-bold text-sm hover:text-primary/90">
                           {activity.cta}
                         </button>
@@ -153,21 +150,20 @@ function OpportunitiesSection() {
                       </div>
                     </CardContent>
                   </Card>
-                </div>
+                </CarouselItem>
               ))}
-            </div>
-          </div>
+            </CarouselContent>
+          </Carousel>
         </Animated>
 
-        {/* 🔹 INDICATORS */}
         <Animated variants={fadeMove("up", 20, 0.35)}>
           <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+            {Array.from({ length: count }).map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
+                onClick={() => api?.scrollTo(index)}
                 className={`h-2 rounded-full transition-all ${
-                  currentIndex === index ? "w-8 bg-primary" : "w-2 bg-gray-300"
+                  current === index ? "w-8 bg-primary" : "w-2 bg-gray-300"
                 }`}
                 aria-label={`Slide ${index + 1}`}
               />
