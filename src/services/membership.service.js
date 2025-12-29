@@ -1,39 +1,34 @@
-const getAllMembershipPlans = async () => {
-  const plans = [
-    {
-      name: "Student Membership",
-      description: "Designed specifically for school and college students.",
-      isPopular: false,
-      features: [
-        "Affordable annual fee",
-        "Access to all basic benefits",
-        "Student-focused learning resources",
-      ],
-    },
-    {
-      name: "Professional Membership",
-      description: "Advanced features for learners focused on career growth.",
-      isPopular: true,
-      features: [
-        "Advanced learning features",
-        "Exclusive masterclasses",
-        "Career guidance sessions",
-      ],
-    },
-    {
-      name: "Premium Membership",
-      description: "All-access experience with guaranteed career outcomes.",
-      isPopular: false,
-      features: [
-        "All-access pass",
-        "Internship guarantee",
-        "Personalized mentorship",
-        "Project review & portfolio building",
-      ],
-    },
-  ];
+import { API_BASE } from "./constant.service";
 
-  return plans;
+export const getAllMembershipPlans = async () => {
+  const res = await fetch(`${API_BASE}/memberships`);
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  const json = await res.json();
+  return json.data;
 };
 
-export { getAllMembershipPlans };
+export async function registerMembership(data) {
+  const res = await fetch(`${API_BASE}/memberships/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      fullName: data.fullName,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      reason: data.reason,
+      membership: data.membership, // membership ID
+    }),
+  });
+
+  const result = await res.json();
+
+  if (!res.ok) {
+    throw new Error(result.message || "Something went wrong");
+  }
+
+  return result;
+}

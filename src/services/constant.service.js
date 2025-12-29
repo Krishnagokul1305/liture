@@ -66,4 +66,6 @@ const teamMembers = [
   },
 ];
 
-export { activities, teamMembers };
+const API_BASE = "https://liture-admin.vercel.app/api";
+
+export { activities, teamMembers, API_BASE };
