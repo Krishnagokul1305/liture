@@ -11,41 +11,21 @@ import { Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { Animated } from "../../../components/Animated";
 import { container, fadeMove } from "../../../utils/animations";
+import { getAllMembershipPlans } from "../../../services/membership.service";
+import { useQuery } from "@tanstack/react-query";
+import MembershipSkeleton from "../../../components/skeletons/MembershipSkeleton";
+import { ErrorState } from "../../../components/ErrorState";
+import Modal from "../../../components/Modal";
 
 export default function MembershipSection() {
-  const plans = [
-    {
-      name: "Student Membership",
-      description: "Designed specifically for school and college students.",
-      isPopular: false,
-      features: [
-        "Affordable annual fee",
-        "Access to all basic benefits",
-        "Student-focused learning resources",
-      ],
-    },
-    {
-      name: "Professional Membership",
-      description: "Advanced features for learners focused on career growth.",
-      isPopular: true,
-      features: [
-        "Advanced learning features",
-        "Exclusive masterclasses",
-        "Career guidance sessions",
-      ],
-    },
-    {
-      name: "Premium Membership",
-      description: "All-access experience with guaranteed career outcomes.",
-      isPopular: false,
-      features: [
-        "All-access pass",
-        "Internship guarantee",
-        "Personalized mentorship",
-        "Project review & portfolio building",
-      ],
-    },
-  ];
+  const {
+    data: plans,
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["membership-plans"],
+    queryFn: getAllMembershipPlans,
+  });
 
   return (
     <section
@@ -53,7 +33,6 @@ export default function MembershipSection() {
       id="membership"
     >
       <div className="mx-auto max-w-7xl">
-        {/* 🔹 HEADER (appears first) */}
         <Animated
           variants={fadeMove("up", 40, 0)}
           className="text-center mb-12"
@@ -75,77 +54,98 @@ export default function MembershipSection() {
           viewport={{ once: true, amount: 0.3 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-center"
         >
-          {plans.map((plan) => (
-            <motion.div
-              key={plan.name}
-              variants={fadeMove("up", 40, plan.isPopular ? 0.15 : 0)}
-            >
-              <Card
-                className={`relative overflow-hidden rounded-lg transition-all ${
-                  plan.isPopular
-                    ? "bg-primary text-white border-0 shadow-2xl md:scale-105 lg:scale-110"
-                    : "bg-white border border-gray-200 shadow-sm hover:shadow-md"
-                }`}
+          {isLoading &&
+            Array.from({ length: 3 }).map((_, i) => (
+              <motion.div key={i} variants={fadeMove("up", 40, i * 0.1)}>
+                <MembershipSkeleton />
+              </motion.div>
+            ))}
+
+          {isError && (
+            <div className="col-span-full w-full flex justify-center">
+              <ErrorState />
+            </div>
+          )}
+
+          {!isLoading &&
+            !isError &&
+            plans?.map((plan) => (
+              <motion.div
+                key={plan.name}
+                variants={fadeMove("up", 40, plan.isPopular ? 0.15 : 0)}
               >
-                <CardHeader className="pb-3 md:pb-6">
-                  <CardTitle
-                    className={`text-2xl font-bold ${
-                      plan.isPopular ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    {plan.name}
-                  </CardTitle>
-                  <CardDescription
-                    className={`text-sm leading-relaxed mt-2 ${
-                      plan.isPopular ? "text-blue-100" : "text-gray-600"
-                    }`}
-                  >
-                    {plan.description}
-                  </CardDescription>
-                </CardHeader>
+                <Card
+                  className={`relative overflow-hidden rounded-lg transition-all ${
+                    plan.isPopular
+                      ? "bg-primary text-white border-0 shadow-2xl md:scale-105 lg:scale-110"
+                      : "bg-white border border-gray-200 shadow-sm hover:shadow-md"
+                  }`}
+                >
+                  <CardHeader className="pb-3 md:pb-6">
+                    <CardTitle
+                      className={`text-2xl font-bold ${
+                        plan.isPopular ? "text-white" : "text-gray-900"
+                      }`}
+                    >
+                      {plan.name}
+                    </CardTitle>
+                    <CardDescription
+                      className={`text-sm leading-relaxed mt-2 ${
+                        plan.isPopular ? "text-blue-100" : "text-gray-600"
+                      }`}
+                    >
+                      {plan.description}
+                    </CardDescription>
+                  </CardHeader>
 
-                <CardContent className="space-y-6">
-                  {/* Features */}
-                  <div className="space-y-3">
-                    {plan.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <Check
-                          className={`h-5 w-5 mt-0.5 ${
-                            plan.isPopular ? "text-white" : "text-gray-900"
-                          }`}
-                        />
-                        <span
-                          className={`text-sm ${
-                            plan.isPopular ? "text-blue-50" : "text-gray-700"
-                          }`}
-                        >
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTA */}
-                  <Button
-                    className={`group relative w-full py-6  rounded-lg font-medium mt-10
+                  <CardContent className="space-y-6">
+                    {/* Features */}
+                    <div className="space-y-3">
+                      {plan.features.map((feature, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <Check
+                            className={`h-5 w-5 mt-0.5 ${
+                              plan.isPopular ? "text-white" : "text-gray-900"
+                            }`}
+                          />
+                          <span
+                            className={`text-sm ${
+                              plan.isPopular ? "text-blue-50" : "text-gray-700"
+                            }`}
+                          >
+                            {feature}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <Modal
+                      title="Register Memberships"
+                      description={`Register for ${plan.name}`}
+                      Trigger={
+                        <Button
+                          className={`group relative w-full py-6  rounded-lg font-medium mt-10
     overflow-hidden flex items-center justify-center gap-2
     ${
       plan.isPopular
         ? "bg-white text-primary hover:bg-red-50"
         : "bg-primary text-white"
     }`}
-                  >
-                    <span className="relative z-10">Get Started</span>
+                        >
+                          <span className="relative z-10">Get Started</span>
 
-                    <ArrowRight
-                      className="relative z-10 size-5 transition-transform duration-300
+                          <ArrowRight
+                            className="relative z-10 size-5 transition-transform duration-300
                group-hover:translate-x-1"
-                    />
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                          />
+                        </Button>
+                      }
+                    >
+                      <div>hello</div>
+                    </Modal>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
         </motion.div>
       </div>
     </section>

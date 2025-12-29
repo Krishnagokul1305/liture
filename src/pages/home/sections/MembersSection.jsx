@@ -1,38 +1,8 @@
 import { motion } from "framer-motion";
 import { container, fadeMove } from "../../../utils/animations";
 import { Animated } from "../../../components/Animated";
+import { teamMembers } from "../../../services/constant.service";
 function MembersSection() {
-  const teamMembers = [
-    {
-      name: "CAMERON WILLIAMSON",
-      role: "Head Counselor",
-      image:
-        "https://plus.unsplash.com/premium_photo-1689539137236-b68e436248de?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      bgColor: "bg-primary",
-    },
-    {
-      name: "JANE COOPER",
-      role: "Program Director",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      bgColor: "bg-chart-4",
-    },
-    {
-      name: "ROBERT FOX",
-      role: "Assistant Director",
-      image:
-        "https://plus.unsplash.com/premium_photo-1689977927774-401b12d137d6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      bgColor: "bg-chart-2",
-    },
-    {
-      name: "EMILY RODRIGUEZ",
-      role: "Manager",
-      image:
-        "https://plus.unsplash.com/premium_photo-1690407617686-d449aa2aad3c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      bgColor: "bg-chart-1",
-    },
-  ];
-
   const floatAnimation = (delay = 0) => ({
     animate: { y: [0, -12, 0] },
     transition: {
@@ -105,7 +75,7 @@ function MembersSection() {
               }`}
             >
               <div
-                className={`${member.bgColor} rounded-full w-48 h-48 sm:w-52 sm:h-52 lg:w-56 lg:h-56 mb-6 overflow-hidden`}
+                className={`${member.bgColor} rounded-full w-48 h-48 sm:w-52 sm:h-52 lg:w-56 lg:h-56 mb-3 md:mb-6 overflow-hidden`}
               >
                 <img
                   src={member.image || "/placeholder.svg"}
@@ -114,7 +84,7 @@ function MembersSection() {
                 />
               </div>
 
-              <h3 className="font-black text-xl sm:text-2xl mb-2 text-center">
+              <h3 className="font-black text-xl sm:text-2xl md:mb-2 text-center">
                 {member.name}
               </h3>
               <p className="text-muted-foreground text-sm sm:text-base">

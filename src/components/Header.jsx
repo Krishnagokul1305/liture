@@ -1,13 +1,13 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { Button } from "./ui/button";
 import { Logo } from "../assets";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isHome = location.pathname === "/";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -20,14 +20,27 @@ const Header = () => {
     { id: 5, name: "Contact Us", href: "contact" },
   ];
 
+  // 🔹 Scroll logic only for Home page
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 80);
+    if (!isHome) {
+      setScrolled(true); // Always solid header on other routes
+      return;
+    }
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 80);
+    };
+
     window.addEventListener("scroll", handleScroll);
+
+    // Initial check
+    handleScroll();
+
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
 
   const handleScrollToSection = (sectionId) => {
-    if (window.location.pathname !== "/") {
+    if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
         const el = document.getElementById(sectionId);
@@ -63,9 +76,9 @@ const Header = () => {
                 <button
                   key={item.id}
                   onClick={() => handleScrollToSection(item.href)}
-                  className={`relative font-medium cursor-pointer hover:text-primary transition-colors duration-300 ${
+                  className={`relative font-medium cursor-pointer transition-colors duration-300 ${
                     scrolled ? "text-gray-900" : "text-white"
-                  } after:absolute after:-bottom-[2px] after:left-1/2 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full hover:after:left-0`}
+                  } hover:text-primary after:absolute after:-bottom-[2px] after:left-1/2 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full hover:after:left-0`}
                 >
                   {item.name}
                 </button>
@@ -161,7 +174,7 @@ const Header = () => {
               </button>
 
               {isOpportunitiesOpen && (
-                <div className="ml-4 space-y-2 overflow-hidden">
+                <div className="ml-4 space-y-2">
                   <button
                     onClick={() => navigate("/internships")}
                     className="block px-4 py-2"

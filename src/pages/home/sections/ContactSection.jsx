@@ -43,9 +43,13 @@ function ContactSection() {
 
             <div className="space-y-2">
               <h2 className="text-2xl font-black tracking-tight">PHONE</h2>
-              <div className="space-y-1">
-                <p className="text-lg">(406) 555-0120</p>
-                <p className="text-lg">(316) 555-0116</p>
+              <div className="space-y-1 grid grid-cols-1 gap-0.5">
+                <a href="tel:+919443927255" className="text-lg hover:underline">
+                  (+91) 94439 27255
+                </a>
+                <a href="tel:+919361783438" className="text-lg hover:underline">
+                  (+91) 93617 83438
+                </a>
               </div>
             </div>
 
@@ -61,7 +65,12 @@ function ContactSection() {
 
             <div className="space-y-2">
               <h2 className="text-2xl font-black tracking-tight">MAIL</h2>
-              <p className="text-lg">support@litureedtech.com</p>
+              <a
+                href="mailto:support@litureedtech.com"
+                className="text-lg hover:underline"
+              >
+                support@litureedtech.com
+              </a>
             </div>
           </div>
 

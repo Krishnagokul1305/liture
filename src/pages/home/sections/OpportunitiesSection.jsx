@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,48 +9,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Animated } from "../../../components/Animated";
 import { fadeMove } from "../../../utils/animations";
+import { useNavigate } from "react-router-dom";
+import { activities } from "../../../services/constant.service";
 
 function OpportunitiesSection() {
   const [api, setApi] = useState();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-
-  const activities = [
-    {
-      image:
-        "https://plus.unsplash.com/premium_photo-1661682777553-d620975e42c8",
-      title: "Learn From Industry Leaders",
-      description:
-        "Expert-led webinars on emerging tech, design, careers, AI, and personal branding with live interaction and recorded access.",
-      date: "WEBINARS",
-      cta: "Explore Webinars",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1506784926709-22f1ec395907",
-      title: "Join the Liture EdTech Team",
-      description:
-        "Work with a fast-growing EdTech startup. Opportunities for educators, developers, designers, marketers, and mentors.",
-      date: "CAREERS",
-      cta: "View Open Roles",
-    },
-    {
-      image:
-        "https://plus.unsplash.com/premium_photo-1726081012679-3f470ee279a7",
-      title: "Build Real Skills with Internships",
-      description:
-        "Hands-on internships with real projects, expert mentorship, certifications, and career-ready experience.",
-      date: "INTERNSHIPS",
-      cta: "Apply Now",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216",
-      title: "Partner With Liture EdTech",
-      description:
-        "Collaborate with us for training programs, internships, joint webinars, curriculum support, and skill development.",
-      date: "PARTNERSHIPS",
-      cta: "Become a Partner",
-    },
-  ];
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!api) {
@@ -140,12 +104,15 @@ function OpportunitiesSection() {
                       </p>
 
                       <div className="flex items-center justify-between pt-2 mt-auto">
-                        <button className="text-primary font-bold text-sm hover:text-primary/90">
+                        <button
+                          onClick={() => navigate(activity.path)}
+                          className="text-primary font-bold text-sm hover:text-primary/90 cursor-pointer"
+                        >
                           {activity.cta}
                         </button>
 
                         <span className="text-muted-foreground text-sm font-medium">
-                          {activity.date}
+                          {activity.label}
                         </span>
                       </div>
                     </CardContent>
