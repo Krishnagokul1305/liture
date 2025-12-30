@@ -98,9 +98,9 @@ const Header = () => {
                 <div className="absolute top-full left-0 mt-2 w-48 rounded-xl overflow-hidden bg-white border shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   {[
                     { name: "Internships", path: "/internships" },
-                    { name: "Careers", path: "/careers" },
+                    // { name: "Careers", path: "/careers" },
                     { name: "Webinars", path: "/webinars" },
-                    { name: "Partnerships", path: "/partnership" },
+                    // { name: "Partnerships", path: "/partnership" },
                   ].map((link) => (
                     <button
                       key={link.name}
@@ -176,29 +176,41 @@ const Header = () => {
               {isOpportunitiesOpen && (
                 <div className="ml-4 space-y-2">
                   <button
-                    onClick={() => navigate("/internships")}
+                    onClick={() => {
+                      navigate("/internships");
+                      setIsMenuOpen(false);
+                    }}
                     className="block px-4 py-2"
                   >
                     Internships
                   </button>
-                  <button
-                    onClick={() => navigate("/careers")}
+                  {/* <button
+                    onClick={() => {
+                      navigate("/careers");
+                      setIsMenuOpen(false);
+                    }}
                     className="block px-4 py-2"
                   >
                     Careers
-                  </button>
+                  </button> */}
                   <button
-                    onClick={() => navigate("/webinars")}
+                    onClick={() => {
+                      navigate("/webinars");
+                      setIsMenuOpen(false);
+                    }}
                     className="block px-4 py-2"
                   >
                     Webinars
                   </button>
-                  <button
-                    onClick={() => navigate("/partnership")}
+                  {/* <button
+                    onClick={() => {
+                      navigate("/partnership");
+                      setIsMenuOpen(false);
+                    }}
                     className="block px-4 py-2"
                   >
                     Partnerships
-                  </button>
+                  </button> */}
                 </div>
               )}
             </div>
