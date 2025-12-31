@@ -66,10 +66,10 @@ function ContactSection() {
             <div className="space-y-2">
               <h2 className="text-2xl font-black tracking-tight">MAIL</h2>
               <a
-                href="mailto:support@litureedtech.com"
+                href="mailto:lituretech@gmail.com"
                 className="text-lg hover:underline"
               >
-                support@litureedtech.com
+                lituretech@gmail.com
               </a>
             </div>
           </div>
