@@ -10,11 +10,8 @@ export const getAllMembershipPlans = async () => {
 };
 
 export async function registerMembership(data) {
-  const res = await fetch(`${API_BASE}/memberships/register`, {
+  const res = await fetch(`${API_BASE}/memberships`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
     body: JSON.stringify({
       fullName: data.fullName,
       email: data.email,

@@ -7,3 +7,18 @@ export async function getAllInternships() {
   const json = await res.json();
   return json.data;
 }
+
+export async function createInternshipRegistration(payload) {
+  const res = await fetch(`${API_BASE}/internships`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to register for webinar");
+  }
+
+  return data;
+}

@@ -17,9 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import Spinner from "../Spinner";
-import { useRegisterMembership } from "../../hooks/useRegisterMembership";
+import { useRegisterInternship } from "../../hooks/useRegisterInternship";
 
-/* ✅ SAME schema */
 const internshipFormSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
   email: z.string().email("Enter a valid email"),
@@ -29,7 +28,7 @@ const internshipFormSchema = z.object({
 });
 
 export default function InternshipRegistrationForm({ internshipId, close }) {
-  const { register, submitting } = useRegisterMembership();
+  const { register, submitting } = useRegisterInternship();
 
   const form = useForm({
     resolver: zodResolver(internshipFormSchema),

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import Spinner from "../Spinner";
-import { useRegisterMembership } from "../../hooks/useRegisterMembership";
+import { useRegisterWebinar } from "../../hooks/useRegisterWebinar";
 /* ✅ SAME STRUCTURE, webinar-specific field */
 const webinarFormSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -28,7 +28,7 @@ const webinarFormSchema = z.object({
 });
 
 export default function WebinarRegistrationForm({ webinarId, close }) {
-  const { register, submitting } = useRegisterMembership();
+  const { register, submitting } = useRegisterWebinar();
 
   const form = useForm({
     resolver: zodResolver(webinarFormSchema),
