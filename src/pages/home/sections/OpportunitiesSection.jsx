@@ -105,7 +105,17 @@ function OpportunitiesSection() {
 
                       <div className="flex items-center justify-between pt-2 mt-auto">
                         <button
-                          onClick={() => navigate(activity.path)}
+                          onClick={() => {
+                            if (activity.external) {
+                              window.open(
+                                activity.path,
+                                "_blank",
+                                "noopener,noreferrer"
+                              );
+                            } else {
+                              navigate(activity.path); // internal route
+                            }
+                          }}
                           className="text-primary font-bold text-sm hover:text-primary/90 cursor-pointer"
                         >
                           {activity.cta}
@@ -129,7 +139,7 @@ function OpportunitiesSection() {
               <button
                 key={index}
                 onClick={() => api?.scrollTo(index)}
-                className={`h-2 rounded-full transition-all ${
+                className={`h-2 rounded-full transition-all cursor-pointer ${
                   current === index ? "w-8 bg-primary" : "w-2 bg-gray-300"
                 }`}
                 aria-label={`Slide ${index + 1}`}

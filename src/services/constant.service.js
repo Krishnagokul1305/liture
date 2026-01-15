@@ -17,7 +17,8 @@ const activities = [
       "Work with a fast-growing EdTech startup. Opportunities for educators, developers, designers, marketers, and mentors.",
     label: "Careers",
     cta: "View Open Roles",
-    path: "/careers",
+    path: "https://docs.google.com/spreadsheets/d/1D-Jqn31vxNOFYR2IQhlmSZYqlXla_pcRTTT_AxG3cbo/edit?usp=sharing", // external link
+    external: true,
   },
   {
     image: "https://plus.unsplash.com/premium_photo-1726081012679-3f470ee279a7",
@@ -35,7 +36,8 @@ const activities = [
       "Collaborate with us for training programs, internships, joint webinars, curriculum support, and skill development.",
     label: "Partnerships",
     cta: "Become a Partner",
-    path: "/partnership",
+    path: "https://docs.google.com/spreadsheets/d/1GIXb2XQGpzl_7ghjy6PqKg-Pd9Svdl7l5fzGq6-ZZy4/edit?usp=sharing", // external link
+    external: true,
   },
 ];
 

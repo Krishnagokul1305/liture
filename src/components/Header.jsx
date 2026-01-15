@@ -20,6 +20,17 @@ const Header = () => {
     { id: 5, name: "Contact Us", href: "contact" },
   ];
 
+  const externalLinks = [
+    {
+      name: "Careers",
+      url: "https://docs.google.com/spreadsheets/d/1D-Jqn31vxNOFYR2IQhlmSZYqlXla_pcRTTT_AxG3cbo/edit?usp=sharing",
+    },
+    {
+      name: "Partnerships",
+      url: "https://docs.google.com/spreadsheets/d/1GIXb2XQGpzl_7ghjy6PqKg-Pd9Svdl7l5fzGq6-ZZy4/edit?usp=sharing",
+    },
+  ];
+
   // 🔹 Scroll logic only for Home page
   useEffect(() => {
     if (!isHome) {
@@ -66,9 +77,9 @@ const Header = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <button onClick={() => navigate("/")} className="flex items-center">
+            <a href="/" className="flex items-center">
               <img src={Logo} alt="Logo" className="h-14" />
-            </button>
+            </a>
 
             {/* DESKTOP NAV */}
             <nav className="hidden md:flex items-center space-x-8">
@@ -105,6 +116,17 @@ const Header = () => {
                     <button
                       key={link.name}
                       onClick={() => navigate(link.path)}
+                      className="block w-full text-left px-4 py-3 text-sm font-medium text-gray-700 hover:bg-red-50/50 hover:text-primary"
+                    >
+                      {link.name}
+                    </button>
+                  ))}
+                  {externalLinks.map((link) => (
+                    <button
+                      key={link.name}
+                      onClick={() =>
+                        window.open(link.url, "_blank", "noopener,noreferrer")
+                      }
                       className="block w-full text-left px-4 py-3 text-sm font-medium text-gray-700 hover:bg-red-50/50 hover:text-primary"
                     >
                       {link.name}
@@ -184,15 +206,6 @@ const Header = () => {
                   >
                     Internships
                   </button>
-                  {/* <button
-                    onClick={() => {
-                      navigate("/careers");
-                      setIsMenuOpen(false);
-                    }}
-                    className="block px-4 py-2"
-                  >
-                    Careers
-                  </button> */}
                   <button
                     onClick={() => {
                       navigate("/webinars");
@@ -202,15 +215,17 @@ const Header = () => {
                   >
                     Webinars
                   </button>
-                  {/* <button
-                    onClick={() => {
-                      navigate("/partnership");
-                      setIsMenuOpen(false);
-                    }}
-                    className="block px-4 py-2"
-                  >
-                    Partnerships
-                  </button> */}
+                  {externalLinks.map((link) => (
+                    <button
+                      key={link.name}
+                      onClick={() =>
+                        window.open(link.url, "_blank", "noopener,noreferrer")
+                      }
+                      className="block px-4 py-2"
+                    >
+                      {link.name}
+                    </button>
+                  ))}
                 </div>
               )}
             </div>

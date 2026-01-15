@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { Animated } from "../../../components/Animated";
 import { container, fadeMove } from "../../../utils/animations";
 import { API_BASE } from "../../../services/constant.service";
+import { toast } from "sonner";
 
 function ContactSection() {
   const {
@@ -38,12 +39,11 @@ function ContactSection() {
       if (!result.success) {
         throw new Error(result.message);
       }
-
-      alert("Message sent successfully ✅");
+      toast.success("Message sent successfully ✅");
       reset();
     } catch (err) {
       console.error(err);
-      alert("Failed to send message ❌");
+      toast.error("Something went wrong");
     }
   };
 
