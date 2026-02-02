@@ -149,6 +149,31 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+body {
+  --sb-thumb-color: #dc2626;
+  --sb-size: 5px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 10px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
